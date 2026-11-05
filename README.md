@@ -74,7 +74,7 @@ Le workflow CI compile le firmware sous `espressif/idf:v5.5.4`.
 ## État de validation
 
 - Testé sur PC : conversion couleur, plafond de puissance, option RGBW, courbe CIE 1931, résolution PWM, OTA (blocs fragmentés, erreurs), format `.ota`, table de partitions.
-- **Non compilé sur la cible** dans la session de rédaction (pas d'ESP-IDF disponible). Les noms de l'API Zigbee 1.6 (`esp_zb_color_dimmable_light_*`, `esp_zb_dimmable_light_*`) sont à confirmer par la première compilation CI.
+- **Non compilé sur la cible** dans la session de rédaction (pas d'ESP-IDF disponible). Les noms de l'API Zigbee 1.6 (`esp_zb_color_dimmable_light_*`, `esp_zb_level_cluster_*`) sont à confirmer par la première compilation CI.
 - **Non testé sur matériel**, ni sous Zigbee2MQTT (convertisseur à valider contre la version installée).
 - Non implémenté : effet Identify (DEL), fondu matériel LEDC (les transitions ZCL sont déjà échelonnées par la pile), température de couleur.
 - À faire avant la commande du PCB (section 7 du dossier) : essais A1 (courant du ruban), A2 (PWM sur les rondelles Illume), A3 (blocs 12 V flottants).

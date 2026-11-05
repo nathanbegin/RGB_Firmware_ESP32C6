@@ -33,6 +33,7 @@
 /* ZCL : ColorCapabilities = HS (bit 0) + XY (bit 3). */
 #define COLOR_CAPABILITIES_HS_XY        0x0009
 #define EXTENDED_COLOR_LIGHT_DEVICE_ID  0x010D
+#define DIMMABLE_LIGHT_DEVICE_ID        0x0101
 
 /* Attente avant le premier rapport / validation de l'image OTA (ms) */
 #define FIRST_REPORT_DELAY_MS           10000

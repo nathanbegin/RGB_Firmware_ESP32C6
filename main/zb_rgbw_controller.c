@@ -267,15 +267,19 @@ static esp_zb_ep_list_t *build_endpoints(const light_saved_t *boot)
 
     /* --- EP11 : Dimmable Light (rondelles) --- */
     {
-        esp_zb_dimmable_light_cfg_t cfg = ESP_ZB_DEFAULT_DIMMABLE_LIGHT_CONFIG();
+        /* La bibliothèque 1.6 n'a pas de modèle « Dimmable Light » : On/Off Light + Level. */
+        esp_zb_on_off_light_cfg_t cfg = ESP_ZB_DEFAULT_ON_OFF_LIGHT_CONFIG();
         cfg.on_off_cfg.on_off = boot->washer_on;
-        cfg.level_cfg.current_level = boot->washer_level;
-        esp_zb_cluster_list_t *cl = esp_zb_dimmable_light_clusters_create(&cfg);
+        esp_zb_cluster_list_t *cl = esp_zb_on_off_light_clusters_create(&cfg);
+        esp_zb_level_cluster_cfg_t level_cfg = {.current_level = boot->washer_level};
+        ESP_ERROR_CHECK(esp_zb_cluster_list_add_level_cluster(
+            cl, esp_zb_level_cluster_create(&level_cfg), ESP_ZB_ZCL_CLUSTER_SERVER_ROLE));
+        add_identity(cl);
         add_startup_on_off(cl, boot->startup_washer);
         esp_zb_endpoint_config_t ep = {
             .endpoint = HA_WASHER_ENDPOINT,
             .app_profile_id = ESP_ZB_AF_HA_PROFILE_ID,
-            .app_device_id = ESP_ZB_HA_DIMMABLE_LIGHT_DEVICE_ID,
+            .app_device_id = DIMMABLE_LIGHT_DEVICE_ID,
             .app_device_version = 0,
         };
         ESP_ERROR_CHECK(esp_zb_ep_list_add_ep(ep_list, cl, ep));
