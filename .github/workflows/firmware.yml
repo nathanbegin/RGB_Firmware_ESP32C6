@@ -1,0 +1,42 @@
+name: Firmware validation
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  logic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: bash tests/run.sh
+
+  firmware:
+    runs-on: ubuntu-latest
+    container: espressif/idf:v5.5.4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build ESP32-C6
+        shell: bash
+        run: |
+          . "$IDF_PATH/export.sh"
+          idf.py build
+          python tools/build_ota.py build/zb_rgbw_controller.bin
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ESP-C6-UNIT02-firmware
+          path: |
+            build/zb_rgbw_controller.bin
+            build/bootloader/bootloader.bin
+            build/partition_table/partition-table.bin
+            build/flasher_args.json
+            build/*.ota
+            build/ota-index.json
+            build/ota_data_initial.bin

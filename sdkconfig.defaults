@@ -1,0 +1,19 @@
+# Cible : ESP32-C6-MINI-1-N4 (4 Mo)
+CONFIG_IDF_TARGET="esp32c6"
+CONFIG_ESPTOOLPY_FLASHSIZE_4MB=y
+
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="partitions.csv"
+
+# Retour automatique a l'image precedente si la nouvelle ne valide pas.
+CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE=y
+
+# Zigbee : routeur (alimente en permanence), radio 802.15.4 native
+CONFIG_ZB_ENABLED=y
+CONFIG_ZB_ZCZR=y
+CONFIG_ZB_RADIO_NATIVE=y
+CONFIG_FREERTOS_HZ=1000
+CONFIG_ESP_COEX_SW_COEXIST_ENABLE=y
+
+# Console de secours sur USB Serial/JTAG (IO12/IO13)
+CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y

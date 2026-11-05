@@ -1,0 +1,9 @@
+# Name,   Type, SubType, Offset,   Size,     Flags
+# ESP32-C6-MINI-1-N4 : 4 Mo. Deux emplacements applicatifs de 1,875 Mo, pas de factory.
+nvs,        data, nvs,     0x9000,   0x6000,
+phy_init,   data, phy,     0xf000,   0x1000,
+ota_0,      app,  ota_0,   0x10000,  0x1E0000,
+ota_1,      app,  ota_1,   0x1F0000, 0x1E0000,
+zb_storage, data, fat,     0x3D0000, 16K,
+zb_fct,     data, fat,     0x3D4000, 1K,
+otadata,    data, ota,     0x3D6000, 8K,

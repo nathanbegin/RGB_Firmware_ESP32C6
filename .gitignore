@@ -1,0 +1,21 @@
+# Compilation ESP-IDF et dépendances téléchargées
+build/
+managed_components/
+sdkconfig.old
+
+# Configuration locale et secrets
+.env
+.env.*
+!.env.example
+secrets.*
+*.pem
+*.key
+
+# Éditeurs et système
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+__pycache__/
+
+# sdkconfig est conservé volontairement : configuration fournie, flash 8 Mo.

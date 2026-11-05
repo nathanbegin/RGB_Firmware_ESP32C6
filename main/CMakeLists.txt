@@ -1,0 +1,23 @@
+idf_component_register(
+    SRCS
+        "zb_rgbw_controller.c"
+        "light_engine.c"
+        "light_settings.c"
+        "pwm_driver.c"
+        "app_config.c"
+        "ota_client.c"
+    INCLUDE_DIRS "."
+    REQUIRES
+        esp-zigbee-lib
+        esp-zboss-lib
+        driver
+        esp_driver_gpio
+        esp_driver_ledc
+        nvs_flash
+        app_update
+        freertos
+        esp_wifi
+        esp_netif
+        esp_event
+        esp_http_server
+)
