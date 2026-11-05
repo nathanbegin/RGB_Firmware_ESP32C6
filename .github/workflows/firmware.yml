@@ -29,10 +29,13 @@ jobs:
           . "$IDF_PATH/export.sh"
           idf.py build
           python tools/build_ota.py build/zb_rgbw_controller.bin
+          # Image complète (bootloader + table + app + otadata) pour un flash en un fichier.
+          cd build && python -m esptool --chip esp32c6 merge_bin -o unit02_complet.bin @flash_args
       - uses: actions/upload-artifact@v4
         with:
           name: ESP-C6-UNIT02-firmware
           path: |
+            build/unit02_complet.bin
             build/zb_rgbw_controller.bin
             build/bootloader/bootloader.bin
             build/partition_table/partition-table.bin
